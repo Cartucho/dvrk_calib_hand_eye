@@ -1,4 +1,7 @@
 # dvrk_calib_arms_to_camera
+
+-- REPO UNDER CONSTRUCTION --
+
 The goal of this code is to estimate the geometric transformations between a camera and the robotic arms of a da Vinci dVRK robot. E.g., the transformation from the left-stereo camera to the PSM1's base. This is a fundamental calibration for tasks such as visual servoeing, where you want to move the PSM given input endoscopic images.
 
 Surgical instrument and projected skeleton after calibrating the transformation:
@@ -46,17 +49,22 @@ TODO: ?show sample calibration result?
 
 First, you will need to print the green marker on sticker paper, to wrap the marker around the shaft of the surgical instrument. 
 
+TODO:
 
 ## Step 3 - Get green marker pose in recorded data
 
+TODO:
+
 ## Step 4 - Calculate the transformation
+
+TODO:
 
 ## FAQ
 
-- I moved to set-up joints, what should I do?
+- `I moved to set-up joints, what should I do?`
 If you move the set-up joints you need to repeat the calibration.
 
- - I moved the camera, what should I do?
+ - `I moved the camera, what should I do?`
  You need to put the camera back in the original pose, otherwise repeat the calibration. If you are using the ECM, all you have to do is put the ECM back to the same joint state as you initially had, when you did the transformation calibration! An alternative solution, is to do the advanced calibration decribed below. With the advanced calibration you can update the transformations even when you move the ECM, as long as you do not move the set-up joints.
 
 
