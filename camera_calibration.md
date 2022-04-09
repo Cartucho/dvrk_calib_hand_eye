@@ -1,28 +1,36 @@
-TODO: create marker with 1.25 of aspect ratio
-// min distance = 30 * focal_length_mm
-// focal_length_mm = (sensor_width_mm / sensor_width_pixels) * focal_length_pixels
+# How to calibrate the camera?
 
-Print the PDF file of the camera calibration pattern. Please check that the printed pattern width is indeed X [mm] and the height is Y [mm], to verify that your printer is not automatically scaling the pattern. Attach the pattern to a rigid surface (never bend a calibration pattern!), and take pictures of the calibration pattern in different poses, while respecting the following rules:
-- Focus the cameras to the working distance (in MIS the working distance is usually between 10 [cm] and 20 [cm] TODO: find the right working distance);
+## 1. Preparation 
+
+- Print the camera calibration pattern [PDF file](https://raw.githubusercontent.com/Cartucho/dvrk_calib_arms_to_camera/main/to_print/camera_calibration_pattern.pdf);
+- Check the dimensions of the printed rectangle - black line around the pattern - the width should be 100 [mm] and the height 125 [mm], this is an important step to verify that your printer is not automatically scaling the pattern;
+<img src="https://user-images.githubusercontent.com/15831541/162568372-52c59ed6-58be-42ca-87fe-948e7898212e.png" width="60%">
+
+- Attach the pattern to a rigid and straight surface (never bend the calibration pattern!);
+- Place the pattern approximately 20 [cm] away from the camera, and focus the cameras to that working distance;
+- Sometimes the endoscopic cameras get dirty, so you may need to clean the tip of the endoscope.
+
+## 2. Take pictures
+
+I will ask you to take 50 pictures in total, but before taking these 50 pictures, please take just one or two pictures to check that the pattern is successfully detected. If it is not detected please read carefully the indications below and give it another try!
+
+Take `50 pictures` pictures of the calibration pattern in different poses, while respecting the following rules:
+- Keep the distance between the camera and the pattern around to 20 [cm];
+- Adjust the brightness of the light source, so that the pattern is detected. You need enough light to detect the pattern but you also do not want reflections which would make the corners hard to detect. Tip: you may use your phone's flashlight to get the right brightness;
   [TODO: add picture]
-- At this working distance, take 50 pictures in total, with the pattern at different orientations;
-- Adjust the brightness of the light source, so that the corners are fully visible;
+- Do not move the pattern or the camera while taking a picture! This would cause motion blur. Also, do not hold the pattern in your hand, your hand will shake, and again cause motion blur. Just make sure that it is static while taking each picture;
   [TODO: add picture]
-- Keep the camera in a static position;
-- Do not move the pattern while taking a picture! This would cause motion blur. Also, do not hold the pattern in your hand, your hand is not that steady. Just make sure that it is static while taking each picture;
+- Keep the rectangular line inside the field of view of the camera;
   [TODO: add picture]
-- Capture all the pattern' corners by keeping the pattern inside the field of view of the camera;
-  [TODO: add picture]
-- The pattern should cover as much of the field of view as possible!
-  [TODO: add picture]
-- Do not take pictures with the pattern parallel to the image plane, add small inclinations. Keep the inclination less than 45 degrees;
+- Try not to take pictures with the pattern parallel to the image plane, add inclinations. On the other hand, do not exaggerate on the inclination, try to keep it less than 45 degrees;
   [TODO: add picture]
 
-TODO: sample calibration images
+Example of a calibration set:
 
-To take pictures run the following code
-`python main.py --task camera_take_pictures`
+## 3. Calibrate the camera
 
-`python main.py --task camera_calib`
+Easiest: Use `Matlab` and install the `Computer Vision toolbox`. Then clicks `Apps > camera calibration` and select the images that were captured in Step 2.
 
-TODO: ?show sample calibration result?
+Example of calibration parameters, when using the first generation endoscopes:
+- Distortion:
+- Intrinsic:
