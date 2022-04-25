@@ -2,7 +2,7 @@
 
 ## 1. Preparation 
 
-- Print the camera calibration pattern [PDF file](https://raw.githubusercontent.com/Cartucho/dvrk_calib_arms_to_camera/main/to_print/camera_calibration_pattern.pdf);
+- Print the camera calibration pattern [PDF file](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/to_print/camera_calibration_pattern.pdf);
 - Check the dimensions of the printed rectangle - black line around the pattern - the width should be 100 [mm] and the height 125 [mm], this is an important step to verify that your printer is not automatically scaling the pattern;
 <img src="https://user-images.githubusercontent.com/15831541/162568372-52c59ed6-58be-42ca-87fe-948e7898212e.png" width="60%">
 
