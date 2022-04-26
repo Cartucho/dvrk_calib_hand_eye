@@ -11,7 +11,7 @@ Assumptions:
 - I will assume that you will be using a `8.3 [mm]` surgical instrument, which is the standard diameter of the shaft;
 - You will have `"neon green"` sticker paper, which you can buy on Amazon or any another store. This sticker paper will be used to wrap a marker around the shaft of the surgical instrument;
 
-  <img src="https://user-images.githubusercontent.com/15831541/165297939-ebcb03ef-c781-4ad2-bd5b-16712d0d018d.png" width="50%">
+  <img src="https://user-images.githubusercontent.com/15831541/165297939-ebcb03ef-c781-4ad2-bd5b-16712d0d018d.png" width="20%">
 
 - You have a monocular camera (or stereo) at a fixed position. If you are using the ECM, you can lock the ECM's joints to a fixed state;
 
