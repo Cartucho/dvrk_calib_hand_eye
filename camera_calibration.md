@@ -17,10 +17,13 @@ I will ask you to take 50 pictures in total, but before taking these 50 pictures
 Take `50 pictures` pictures of the calibration pattern in different poses, while respecting the following rules:
 - Keep the distance between the camera and the pattern around 20 [cm];
 - Adjust the brightness of the light source, so that the pattern is detected. Get images `without reflections` and `not too dark`. Tip: you may use your phone's flashlight to get the right brightness;
+
   <img src="https://user-images.githubusercontent.com/15831541/165295443-d4e74908-5d34-4001-82eb-e0b7defb35d9.png" width="50%">
 - Do not move the pattern or the camera while taking a picture! This would cause motion blur. Also, do not hold the pattern in your hand, your hand will shake, and again cause motion blur. Just make sure that it is static while taking each picture;
+
   <img src="https://user-images.githubusercontent.com/15831541/165124470-50de5b22-3839-4f9b-bf2f-cd1fb82067a1.png" width="40%">
 - Keep the rectangular line inside the field of view of the camera;
+
   <img src="https://user-images.githubusercontent.com/15831541/165296055-05a5afff-5ddd-458c-a393-62d0aaebbaed.png" width="50%">
 - Do not to take pictures with the pattern completely parallel to the image plane, add an inclination. On the other hand, do not exaggerate on the inclination, try to keep it less than 45 degrees;
   [TODO: add picture]
