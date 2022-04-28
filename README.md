@@ -13,7 +13,7 @@ Assumptions:
 
   <img src="https://user-images.githubusercontent.com/15831541/165297939-ebcb03ef-c781-4ad2-bd5b-16712d0d018d.png" width="20%">
 
-- You have a monocular camera (or stereo) at a fixed position. If you are using the ECM, you can lock the ECM's joints to a fixed state;
+- You have a monocular (or stereo) `camera at a fixed position`. If you are using the ECM, you can lock the ECM's joints to a fixed state;
 
 ## Step 1 - Camera calibration
 
@@ -21,7 +21,7 @@ First, we will calculate both the `distortion` and `intrinsic camera parameters`
 
 ## Step 2 - Record data + move the robotic arm
 
-First, you will need to print the green marker on sticker paper, to wrap the marker around the shaft of the surgical instrument. 
+First, you will need to print the green marker on sticker paper, to wrap the marker around the shaft of the surgical instrument.
 
 TODO:
 
@@ -41,6 +41,8 @@ If you move the set-up joints you need to repeat the calibration.
  - `I moved the camera, what should I do?`
  You need to put the camera back in the original pose, otherwise repeat the calibration. If you are using the ECM, all you have to do is put the ECM back to the same joint state as you initially had, when you did the transformation calibration! An alternative solution, is to do the advanced calibration decribed below. With the advanced calibration you can update the transformations even when you move the ECM, as long as you do not move the set-up joints.
 
+- `What if I want to use rectified images instead of the ones captured directly from the camera?`
+When you rectify the camera rotates, therefore you need to update the transformation according to that rotation. Another alternative is to rectify the images and repeat step 2 to 4.
 
 ## Advanced calibration: How to update the transformation in real-time if I move the ECM?
 
