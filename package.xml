@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>dvrk_calib_arms_to_camera</name>
+  <name>dvrk_calib_hand_eye</name>
   <version>0.0.0</version>
-  <description>The dvrk_calib_arms_to_camera package</description>
+  <description>The dvrk_calib_hand_eye package</description>
   <maintainer email="jmc19@ic.ac.uk">Joao Cartucho</maintainer>
   <license>Apache2.0</license>
-  <url type="website">https://github.com/Cartucho/dvrk_calib_arms_to_camera</url>
+  <url type="website">https://github.com/Cartucho/dvrk_calib_hand_eye</url>
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
   <build_export_depend>rospy</build_export_depend>

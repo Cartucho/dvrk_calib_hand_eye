@@ -1,4 +1,4 @@
-# dvrk_calib_arms_to_camera
+# dvrk_calib_hand_eye
 
 -- REPO UNDER CONSTRUCTION --
 
@@ -8,26 +8,45 @@ Surgical instrument and projected skeleton after calibrating the transformation:
 TODO: giff with tool moving
 
 Assumptions:
-- I will assume that you will be using a `8.3 [mm]` surgical instrument, which is the standard diameter of the shaft;
+- I will assume that you will be using a `8.35 [mm]` surgical instrument, which is the standard diameter of the shaft;
 - You will have `"neon green"` sticker paper, which you can buy on Amazon or any another store. This sticker paper will be used to wrap a marker around the shaft of the surgical instrument;
 
   <img src="https://user-images.githubusercontent.com/15831541/165297939-ebcb03ef-c781-4ad2-bd5b-16712d0d018d.png" width="20%">
 
 - You have a monocular (or stereo) `camera at a fixed position`. If you are using the ECM, you can lock the ECM's joints to a fixed state;
 
+## Step 0
+
+Clone this repo:
+
+`git clone git@github.com:Cartucho/dvrk_calib_hand_eye.git`
+
+Clone the `cylmarker` sub-module:
+
+`TODO`
+
+Build it:
+
+`catkin build dvrk_calib_hand_eye`
+
 ## Step 1 - Camera calibration
 
 First, we will calculate both the `distortion` and `intrinsic camera parameters` of the camera that you will be using as pivot. In the case of a stereo endoscope, we suggest that you use the left-stereo camera as pivot. It is **very important that the camera is well calibrated**, since this will have a significant impact in the accuracy of the estimated transformations. If you have already accurately calibrated your camera, please skip to step 2, otherwise follow the [camera_calibration.md](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/camera_calibration.md) instructions.
 
-## Step 2 - Record data + move the robotic arm
+## Step 2 - Record data (by moving the surgical instrument)
 
 First, you will need to print the green marker on sticker paper, to wrap the marker around the shaft of the surgical instrument.
+Launch both the camera and the PSM.
 
-TODO:
+After doing that, let's record the green marker at multiple poses:
+
+`rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
 ## Step 3 - Get green marker pose in recorded data
 
-TODO:
+`Home` the PSM.
+
+`rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
 ## Step 4 - Calculate the transformation
 

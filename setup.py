@@ -5,7 +5,7 @@ from catkin_pkg.python_setup import generate_distutils_setup
 
 # fetch values from package.xml
 setup_args = generate_distutils_setup(
-    packages=['dvrk_calib_arms_to_camera'],
+    packages=['dvrk_calib_hand_eye'],
     package_dir={'': 'src'})
 
 setup(**setup_args)
