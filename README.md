@@ -44,11 +44,17 @@ After doing that, let's record the green marker at multiple poses:
 
 `rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
+Then the robot will automatically move the PSM through the recorded poses and interpolate points in between.
+This is both to guarantee that the images are taken at a stable pose (no motion blur) and that we have enough data for the calibration.
+`Home` the PSM and then run this command:
+
+`rosrun dvrk_calib_hand_eye replay_interpolated.py`
+
+This step will take a few minutes to be completed. You can check that the data is being recorded in `data/cam_interpolated` and `data/joint_interpolated.yaml`.
+
 ## Step 3 - Get green marker pose in recorded data
 
-`Home` the PSM.
-
-`rosrun dvrk_calib_hand_eye record_image_and_joints.py`
+TODO:
 
 ## Step 4 - Calculate the transformation
 
