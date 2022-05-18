@@ -12,7 +12,12 @@
 
 ## 2. Take pictures
 
-I will ask you to take 50 pictures in total, but before taking these 50 pictures, please take just one or two pictures to check that the pattern is successfully detected. If it is not detected please read carefully the indications below and give it another try!
+Capture images to calibrate the camera by running:
+`rosrun dvrk_calib_hand_eye record_image_calib.py`
+If the pattern is being successfully detected it will be drawn in the image, like the following example:
+
+TODO: add image here
+
 
 Take `50 pictures` pictures of the calibration pattern in different poses, while respecting the following rules:
 - Keep the distance between the camera and the pattern around 20 [cm];
@@ -36,7 +41,9 @@ TODO add matlab image of poses
 
 ## 3. Calibrate the camera
 
-Easiest: Use `Matlab` and install the `Computer Vision toolbox`. Then clicks `Apps > camera calibration` and select the images that were captured in Step 2.
+`rosrun dvrk_calib_hand_eye calib_camera.py`
+
+Alternative: Use `Matlab` and install the `Computer Vision toolbox`. Then click `Apps > camera calibration`, select the captured images `data/cam_calib/` and proceed with the calibration.
 
 Example of calibration parameters, when using the:
 
