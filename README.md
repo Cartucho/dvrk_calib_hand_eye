@@ -35,7 +35,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Edit the rostopics in [settings.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/settings.yaml) to the target PSM and camera.
+3. Edit the rostopics in [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) to the target PSM and camera.
 
 ## Step 1 - Camera calibration
 
@@ -44,7 +44,7 @@ First, we will calculate both the `distortion` and `intrinsic camera parameters`
 ## Step 2 - Record data (by moving the surgical instrument)
 
 First, print the marker on `green sticker paper`, [PDF file](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/to_print/green_marker_pattern.pdf)
-Then, you cut one of the printed markers and wrap it around the shaft of a `8 [mm]` surgical instrument.
+Then, you cut one of the printed markers and wrap it around the shaft of a `8.3 [mm]` surgical instrument.
 Launch both the camera and the PSM.
 
 After doing that, let's record the green marker at multiple poses:
