@@ -79,7 +79,7 @@ After adjusting the HSV ranges, let's get the poses (which will be automatically
 python main.py --task p --path ..
 ```
 
-Remember always to activate the virtual environment `(venv)` and unset ROS's default old OpenCV `unset PYTHONPATH` before running the command `python main.py --task p --path ..`.
+Remember always to activate the virtual environment `(venv)` and unset ROS's default old OpenCV `unset PYTHONPATH` before running the command `python main.py --task p --path ..`
 
 ## Step 4 - Calculate the transformation (cam_T_basePSM)
 
