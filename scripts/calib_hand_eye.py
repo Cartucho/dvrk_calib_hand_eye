@@ -104,7 +104,8 @@ def calib_hand_eye(path_joints, path_images):
       B.append(B_i)
   if len(A) > 0:
     _, bPSM_T_c = calibrate_ax_yb(A, B)
-    print(bPSM_T_c)
+    c_T_bPSM = np.linalg.inv(bPSM_T_c)
+    print("cam_T_basePSM=\n{}".format(c_T_bPSM))
   else:
     print("No poses found, please make sure you did step 3!")
 
