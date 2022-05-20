@@ -69,18 +69,24 @@ unset PYTHONPATH
 
 Then check if the HSV values are good for segmenting the green marker:
 ```
-python main.py --task a
+python main.py --task a --path ..
+```
+You should see the `entire` marker highlighted in red in most of the images. If you don't you will have to adjust the HSV ranges in the [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) file. If you move your mouse over the images you will see the HSV value at each point of the image.
+
+
+After adjusting the HSV ranges, let's get the poses (which will be automatically saved if the marker is successfully detected):
+```
+python main.py --task p --path ..
 ```
 
-If so, then let's calculate the 
-
-Then, let's edit the cylmarker's config.yaml file.
-
-
+Remember always to activate the virtual environment `(venv)` and unset ROS's default old OpenCV `unset PYTHONPATH` before running the command `python main.py --task p --path ..`.
 
 ## Step 4 - Calculate the transformation (cam_T_basePSM)
 
-TODO:
+Final step, do the hand-eye calibration:
+```
+rosrun dvrk_calib_hand_eye calib_hand_eye.py
+```
 
 ## FAQ
 
