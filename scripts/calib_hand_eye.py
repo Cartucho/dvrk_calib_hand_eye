@@ -115,8 +115,8 @@ def main(args):
   rospack = rospkg.RosPack()
   path_package = rospack.get_path('dvrk_calib_hand_eye')
   path_data = os.path.join(path_package, 'data')
-  path_images = os.path.join(path_package, 'cam_interpolated')
-  path_joints = os.path.join(path_package, 'joint_interpolated.yaml')
+  path_images = os.path.join(path_data, 'cam_interpolated')
+  path_joints = os.path.join(path_data, 'joint_interpolated.yaml')
   if os.path.isfile(path_joints):
     calib_hand_eye(path_joints, path_images)
   else:
