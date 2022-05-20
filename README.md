@@ -59,17 +59,14 @@ TODO:
 
 ## FAQ
 
-- `I moved the set-up joints, what should I do?`
+1. `I moved the set-up joints, what should I do?`
 If you move the set-up joints you need to repeat the calibration (step 2, 3 and 4).
 
- - `I moved the camera, what should I do?`
- You need to put the camera back in the original pose, otherwise repeat the calibration. If you are using the ECM, all you have to do is put the ECM back to the same joint state as you initially had, when you did the transformation calibration! An alternative solution, is to do the advanced calibration decribed below. With the advanced calibration you can update the transformations even when you move the ECM, as long as you do not move the set-up joints.
+2. `I moved the camera, what should I do?`
+The easiest is to repeat the calibration (step 2, 3 and 4). If you are using the ECM you could try sending the camera to the same initial state (same joint values as when you did the calibration), but please note that when locking and unlocking motors the joint values will always change slightly, which adds error to the calibration. Read question 4. to learn how to compensate for the ECM joint motions.
 
-- `What if I want to use rectified images instead of the ones captured directly from the camera?`
+3. `What if I want to use rectified images instead of the ones captured directly from the camera?`
 When you rectify the camera rotates, therefore you need to update the transformation according to that rotation. Specifically, if you are using OpenCV's `... R1 ... = cv.stereoRectify()` you have to multiply `R1 = camRect_T_cam` with the estimated transformation `cam_T_basePSM`, since `camRect_T_basePSM = camRect_T_cam @ cam_T_basePSM`. Note that you will have to make `R1` homogeneous and 4x4 for doing this product. Another alternative (Option B) is to rectify the images captured in step 2 and repeat step 3 and 4. Note that if you do (Option B) you will also need to update the camera calibration values, set all the distortion to 0, since rectified images have no distortion and set the intrinsic with the first 3x3 values of your rectified intrinsics, you get this from `P1` if you use `cv.stereoRectify()`.
 
-
-## Advanced calibration: How to update the transformation in real-time if I move the ECM?
-
-If you move the ECM, you change the ECMS' joints state, and therefore the transformation between the camera and the base of the PSM's also changes.
-TODO: explain that there is a rigid transformation
+4. `How to update the cam_T_basePSM transformation in real-time if I move the ECM?`
+To achieve this you have to perform another hand-eye calibration to estimate the rigid transformation from the ECM's centre (`/ECM/measured_cp`), to the camera. This way, every time the ECM joint values change you can re-adjust the `cam_T_basePSM` transformation.
