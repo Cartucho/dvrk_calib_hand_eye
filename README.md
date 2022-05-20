@@ -17,13 +17,9 @@ Assumptions:
 
 ## Step 0
 
-Clone this repo:
+Clone this repo. Do not forget to add `--recurse-submodules` as shown below (this flag is used to clone the [cylmarker](https://github.com/Cartucho/cylmarker) submodule):
 
-`git clone git@github.com:Cartucho/dvrk_calib_hand_eye.git`
-
-Clone the `cylmarker` sub-module:
-
-`TODO`
+`git clone --recurse-submodules git@github.com:Cartucho/dvrk_calib_hand_eye.git`
 
 Build it:
 
@@ -37,7 +33,8 @@ First, we will calculate both the `distortion` and `intrinsic camera parameters`
 
 ## Step 2 - Record data (by moving the surgical instrument)
 
-First, you will need to print the marker on green sticker paper. Then, you need to wrap the marker around the shaft of a `8 [mm]` surgical instrument.
+First, print the marker on `green sticker paper`, [PDF file](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/to_print/green_marker_pattern.pdf)
+Then, you cut one of the printed markers and wrap it around the shaft of a `8 [mm]` surgical instrument.
 Launch both the camera and the PSM.
 
 After doing that, let's record the green marker at multiple poses:
