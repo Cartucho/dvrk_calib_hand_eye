@@ -43,6 +43,8 @@ TODO add matlab image of poses
 
 `rosrun dvrk_calib_hand_eye calib_camera.py`
 
+Please edit these values in the [camera_calibration.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/camera_calibration.yaml) file!
+
 Alternative: Use `Matlab` and install the `Computer Vision toolbox`. Then click `Apps > camera calibration`, select the captured images `data/cam_calib/` and proceed with the calibration.
 
 Example of calibration parameters, when using the:

@@ -46,10 +46,9 @@ def cam_calib(path_data):
   im_path_list = glob.glob(os.path.join(path_data, "*.png"))
   K1, D1 = calib_monocular(criteria, objp, size, im_path_list, "calib_images")
   np.set_printoptions(threshold=sys.maxsize, suppress=True)
-  print("Copy and paste these values into the config.yaml file!")
-  print("\tintrinsic: {}".format(K1.tolist()))
-  print("\tdistortion: {}".format(D1[0].tolist()))
-
+  print("Copy and paste these values into the `camera_calibration.yaml` file!\n")
+  print("intrinsic: {}".format(K1.tolist()))
+  print("distortion: {}".format(D1[0].tolist()))
 
 
 def main(args):

@@ -2,6 +2,21 @@ rostopic:
     sub_cam: "/patterson/left/decklink/camera/image_raw"
     sub_psm: "/dvrk/PSM3/state_joint_current"
     pub_psm: "/dvrk/PSM3/set_position_goal_joint"
-cam_calib:
-    intrinsic: [[8.2789178834113000e+02, 0., 3.9948582391604810e+02], [0., 9.0188227443211701e+02, 2.4410921430723019e+02], [0., 0., 1.]]
-    distortion: [-3.5165483920340324e-01, 7.0890959181400526e-01, 4.4007079799268977e-03, -8.0110377205296741e-04, -9.1756159703348439e-01]
+# Green marker segmentation (HSV):
+h_min: 30 # h_min and h_max should be around the green color, usually around 60 but it depends on the camera.
+h_max: 70
+s_min: 15
+v_min: 50 # v_min -> You can lower this when the marker is in low light conditions.
+
+# Do NOT change the following
+img_dir_path: '../data/cam_interpolated'
+img_format: '.png'
+min_detected_sqnc: 4
+min_cntr_area_prcntg: 0.03
+max_angle_diff_group: 1.5
+max_angle_diff_label: 35.0
+cyl_diameter_mm: 8.35
+printing_paper_thickness_mm: 0.08
+
+
+

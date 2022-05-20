@@ -15,9 +15,9 @@ Assumptions:
 
 - You have a monocular (or stereo) `camera at a fixed position`. If you are using the ECM, you can lock the ECM's joints to a fixed state;
 
-## Step 0
+## Step 0 - Setting up
 
-Clone and build this repo as a catkin package. Do not forget to add `--recurse-submodules` as shown below (this flag is used to clone the [cylmarker](https://github.com/Cartucho/cylmarker) submodule):
+1. Clone and build this repo as a catkin package. Do not forget to add `--recurse-submodules` as shown below (this flag is used to clone the [cylmarker](https://github.com/Cartucho/cylmarker) submodule):
 
 ```
 cd ~/catkin_ws/src
@@ -25,11 +25,21 @@ git clone --recurse-submodules https://github.com/Cartucho/dvrk_calib_hand_eye.g
 catkin build dvrk_calib_hand_eye
 ```
 
-Modify the rostopics in [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) to the target PSM and camera.
+2. When the build is completed, open a new terminal and set-up the cylmarker code:
+
+```
+roscd dvrk_calib_hand_eye/cylmarker
+python3.9 -m pip install --user virtualenv
+python3.9 -m virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+3. Edit the rostopics in [settings.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/settings.yaml) to the target PSM and camera.
 
 ## Step 1 - Camera calibration
 
-First, we will calculate both the `distortion` and `intrinsic camera parameters` of the camera that you will be using as pivot. In the case of a stereo endoscope, we suggest that you use the left-stereo camera as pivot. It is **very important that the camera is well calibrated**, since this will have a significant impact in the accuracy of the estimated transformations. If you have already accurately calibrated your camera just edit the values in the file [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) skip to step 2, otherwise follow the [camera_calibration.md](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/camera_calibration.md) instructions.
+First, we will calculate both the `distortion` and `intrinsic camera parameters` of the camera that you will be using as pivot. In the case of a stereo endoscope, we suggest that you use the left-stereo camera as pivot. It is **very important that the camera is well calibrated**, since this will have a significant impact in the accuracy of the estimated transformations. If you have already accurately calibrated your camera just then edit the values in the [camera_calibration.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/camera_calibration.yaml) file and skip to step 2, otherwise follow the [camera_calibration.md](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/camera_calibration.md) instructions.
 
 ## Step 2 - Record data (by moving the surgical instrument)
 
@@ -51,7 +61,22 @@ This step will take a few minutes to be completed. You can check that the data i
 
 ## Step 3 - Get green marker pose in recorded data
 
-TODO:
+```
+roscd dvrk_calib_hand_eye/cylmarker
+source venv/bin/activate
+unset PYTHONPATH
+```
+
+Then check if the HSV values are good for segmenting the green marker:
+```
+python main.py --task a
+```
+
+If so, then let's calculate the 
+
+Then, let's edit the cylmarker's config.yaml file.
+
+
 
 ## Step 4 - Calculate the transformation (cam_T_basePSM)
 
