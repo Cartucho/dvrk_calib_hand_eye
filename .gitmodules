@@ -1,3 +1,3 @@
 [submodule "cylmarker"]
 	path = cylmarker
-	url = git@github.com:Cartucho/cylmarker.git
+	url = https://github.com/Cartucho/cylmarker.git

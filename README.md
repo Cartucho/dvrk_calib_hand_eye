@@ -21,7 +21,7 @@ Clone and build this repo as a catkin package. Do not forget to add `--recurse-s
 
 ```
 cd ~/catkin_ws/src
-git clone --recurse-submodules git@github.com:Cartucho/dvrk_calib_hand_eye.git
+git clone --recurse-submodules https://github.com/Cartucho/dvrk_calib_hand_eye.git
 catkin build dvrk_calib_hand_eye
 ```
 
