@@ -3,6 +3,7 @@ import sys
 import os
 import glob
 import math
+import yaml
 
 import rospy
 import rospkg
@@ -29,8 +30,6 @@ def calibrate_ax_yb(AA, BB):
         T += np.kron(Rb,Ra)
 
     (u,s,v)=np.linalg.svd(T)
-    #(u,d,v)=np.linalg.svd(T)
-    #s = np.array([[d[j] if i==j else 0 for j in range(len(T))] for i in range(len(T[0]))])
     v = v.T # in python v.T = v in matlab
     x = v[:,0]
     y = u[:,0]
