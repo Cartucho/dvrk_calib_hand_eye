@@ -17,13 +17,13 @@ Assumptions:
 
 ## Step 0
 
-Clone this repo. Do not forget to add `--recurse-submodules` as shown below (this flag is used to clone the [cylmarker](https://github.com/Cartucho/cylmarker) submodule):
+Clone and build this repo as a catkin package. Do not forget to add `--recurse-submodules` as shown below (this flag is used to clone the [cylmarker](https://github.com/Cartucho/cylmarker) submodule):
 
-`git clone --recurse-submodules git@github.com:Cartucho/dvrk_calib_hand_eye.git`
-
-Build it:
-
-`catkin build dvrk_calib_hand_eye`
+```
+cd ~/catkin_ws/src
+git clone --recurse-submodules git@github.com:Cartucho/dvrk_calib_hand_eye.git
+catkin build dvrk_calib_hand_eye
+```
 
 Modify the rostopics in [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) to the target PSM and camera.
 
