@@ -72,15 +72,17 @@ def transf_DH_modified(alpha, a, theta, d):
     return trnsf
 
 
-def get_bPSM_T_j3(joint_value):
+def get_bPSM_T_j4(joint_value):
     LRcc = 0.4318
+    LTool = 0.4162 # For the purpose of this repo this value won't affect the final result
     """                               alpha   ,  a , theta                      , D                   """
     base_T_j1 = transf_DH_modified( np.pi*0.5 , 0. , joint_value[0] + np.pi*0.5 ,                  0. )
     j1_T_j2   = transf_DH_modified(-np.pi*0.5 , 0. , joint_value[1] - np.pi*0.5 ,                  0. )
     j2_T_j3   = transf_DH_modified( np.pi*0.5 , 0. ,                        0.  , joint_value[2]-LRcc )
-    #bPSM_T_j3 = base_T_j1 @ j1_T_j2 @ j2_T_j3 #(requires a newer numpy version)
-    bPSM_T_j3 = np.matmul(base_T_j1, np.matmul(j1_T_j2, j2_T_j3))
-    return bPSM_T_j3
+    j3_T_j4   = transf_DH_modified(         0 , 0  ,             joint_value[3] ,               LTool )
+    #bPSM_T_j4 = base_T_j1 @ j1_T_j2 @ j2_T_j3 @ j3_T_j4 #(requires a newer numpy version)
+    bPSM_T_j4 = np.matmul(base_T_j1, np.matmul(j1_T_j2, np.matmul(j2_T_j3, j3_T_j4)))
+    return bPSM_T_j4
 
 
 def calib_hand_eye(path_joints, path_images):
@@ -94,7 +96,7 @@ def calib_hand_eye(path_joints, path_images):
   for im_id, joints in A_raw.items():
     # Get Ai
     joints = joints["PSM"]["joints"]
-    A_i = get_bPSM_T_j3(joints)
+    A_i = get_bPSM_T_j4(joints)
     # Get Bi
     B_i_path = os.path.join(path_images, "{}.txt".format(im_id))
     if os.path.isfile(B_i_path):
@@ -104,9 +106,10 @@ def calib_hand_eye(path_joints, path_images):
       B.append(B_i)
   if len(A) > 0:
     _, bPSM_T_c = calibrate_ax_yb(A, B)
-    print("basePSM_T_cam=\n{}".format(bPSM_T_c))
+    np.set_printoptions(threshold=sys.maxsize)
+    print("basePSM_T_cam =\n{}".format(repr(bPSM_T_c)))
     c_T_bPSM = np.linalg.inv(bPSM_T_c)
-    print("cam_T_basePSM=\n{}".format(c_T_bPSM))
+    print("cam_T_basePSM =\n{}".format(repr(c_T_bPSM)))
   else:
     print("No poses found, please make sure you did step 3!")
 
