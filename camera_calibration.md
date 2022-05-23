@@ -32,7 +32,7 @@ Take `50 pictures` pictures of the calibration pattern in different poses, while
   <img src="https://user-images.githubusercontent.com/15831541/165124470-50de5b22-3839-4f9b-bf2f-cd1fb82067a1.png" width="50%">
 - Keep the rectangular line inside the field of view of the camera;
 
-  <img src="https://user-images.githubusercontent.com/15831541/165296055-05a5afff-5ddd-458c-a393-62d0aaebbaed.png" width="50%">
+  <img src="https://user-images.githubusercontent.com/15831541/169905365-b5743d77-c42d-44fd-82a1-e441ac446579.png" width="50%">
 - Do not to take pictures with the pattern completely parallel to the image plane, add an inclination. On the other hand, do not exaggerate on the inclination, try to keep it less than 45 degrees;
   [TODO: add picture]
 
