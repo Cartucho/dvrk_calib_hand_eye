@@ -13,7 +13,10 @@
 ## 2. Take pictures
 
 Capture images to calibrate the camera by running:
-`rosrun dvrk_calib_hand_eye record_image_calib.py`
+```
+rosrun dvrk_calib_hand_eye record_image_calib.py
+```
+
 If the pattern is being successfully detected it will be drawn in the image, like the following example:
 
 TODO: add image here
