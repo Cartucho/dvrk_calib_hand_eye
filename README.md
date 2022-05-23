@@ -45,21 +45,27 @@ First, we will calculate both the `distortion` and `intrinsic camera parameters`
 
 First, print the marker on `green sticker paper`, [PDF file](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/to_print/green_marker_pattern.pdf)
 Then, you cut one of the printed markers and wrap it around the shaft of a `8.3 [mm]` surgical instrument.
-Launch both the camera and the PSM.
+Launch the PSM (similar to this `rosrun dvrk_robot dvrk_console_json -j xml/console-PSM.json`) and press `Power On`.
+Turn the camera/endoscope's light on.
 
 After doing that, let's record the green marker at multiple poses:
 
 `rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
-Then the robot will automatically move the PSM through the recorded poses and interpolate points in between.
-This is both to guarantee that the images are taken at a stable pose (no motion blur) and that we have enough data for the calibration.
-`Home` the PSM and then run this command:
+All you have to do is move the arm to multiple poses and press the [Enter] key to record each one. We recommend recording at least 15 poses.
+Press `q` when finished.
 
+After recording the poses, press `Home` PSM and then run the following command:
 `rosrun dvrk_calib_hand_eye replay_interpolated.py`
+
+The robot will now move the PSM through the recorded poses and automatically interpolate points in between. If the robot does not move, then you probably forgot to press the `Home` button.
+This is both to guarantee that the images are taken at a stable pose (no motion blur) and that we have enough data for the calibration.
 
 This step will take a few minutes to be completed. You can check that the data is being recorded in `data/cam_interpolated` and `data/joint_interpolated.yaml`.
 
 ## Step 3 - Get green marker pose in recorded data
+
+Open a new terminal and run the following commands:
 
 ```
 roscd dvrk_calib_hand_eye/cylmarker
@@ -71,10 +77,10 @@ Then check if the HSV values are good for segmenting the green marker:
 ```
 python main.py --task a --path ..
 ```
-You should see the `entire` marker highlighted in red in most of the images. If you don't you will have to adjust the HSV ranges in the [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) file. If you move your mouse over the images you will see the HSV value at each point of the image.
+You should see the `entire` marker highlighted in red in the images. If you don't you will have to adjust the HSV ranges in the [config.yaml](https://github.com/Cartucho/dvrk_calib_arms_to_camera/blob/main/config.yaml) file. Tip: If you move your mouse over the images you will see the HSV value at each point of the image.
 
 
-After adjusting the HSV ranges, let's get the poses (which will be automatically saved if the marker is successfully detected):
+After adjusting the HSV ranges (if needed), let's get the poses (which will be automatically saved if the marker is successfully detected):
 ```
 python main.py --task p --path ..
 ```
@@ -83,7 +89,7 @@ Remember always to activate the virtual environment `(venv)` and unset ROS's def
 
 ## Step 4 - Calculate the transformation (cam_T_basePSM)
 
-Final step, do the hand-eye calibration:
+Final step, in a separate terminal (to re-set the ROS Python path) do the hand-eye calibration:
 ```
 rosrun dvrk_calib_hand_eye calib_hand_eye.py
 ```
