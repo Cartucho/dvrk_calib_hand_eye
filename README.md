@@ -1,11 +1,9 @@
 # dvrk_calib_hand_eye
 
--- REPO UNDER CONSTRUCTION --
-
 The goal of this code is to estimate the geometric transformations between a camera and the robotic arms of a da Vinci dVRK robot. E.g., the transformation from the left-stereo camera to the PSM1's base. This is a fundamental calibration for tasks such as visual servoeing, where you want to move the PSM given input endoscopic images.
 
-Surgical instrument and projected skeleton after calibrating the transformation:
-TODO: giff with tool moving
+Surgical instrument and projected joint after calibrating the transformation:
+<img src="https://user-images.githubusercontent.com/15831541/169965528-98f140a6-b151-4b18-8f86-e8d7b8ffd207.gif" width="60%">
 
 Assumptions:
 - I will assume that you will be using a `8.35 [mm]` surgical instrument, which is the standard diameter of the shaft;
