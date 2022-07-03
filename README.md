@@ -107,3 +107,22 @@ When you rectify the camera rotates, therefore you need to update the transforma
 
 4. `How to update the cam_T_basePSM transformation in real-time if I move the ECM?`
 To achieve this you have to perform another hand-eye calibration to estimate the rigid transformation from the ECM's centre (`/ECM/measured_cp`), to the camera. This way, every time the ECM joint values change you can re-adjust the `cam_T_basePSM` transformation. However, keep in mind that at any time, if you move the set-up joints, you need to calibrate `cam_T_basePSM` from scratch (step 2, 3 and 4).
+
+## Reference
+
+If you use this tool please cite the following [paper](https://doi.org/10.1080/21681163.2021.1997647):
+
+```bibtex
+@article{cartucho2022enhanced,
+  title={An enhanced marker pattern that achieves improved accuracy in surgical tool tracking},
+  author={Cartucho, Jo{\~a}o and Wang, Chiyu and Huang, Baoru and S. Elson, Dan and Darzi, Ara and Giannarou, Stamatia},
+  journal={Computer Methods in Biomechanics and Biomedical Engineering: Imaging \& Visualization},
+  volume={10},
+  number={4},
+  pages={400--408},
+  year={2022},
+  publisher={Taylor \& Francis},
+  doi = {10.1080/21681163.2021.1997647},
+  URL = {https://doi.org/10.1080/21681163.2021.1997647},
+}
+```
