@@ -50,7 +50,7 @@ After doing that, let's record the green marker at multiple poses:
 
 `rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
-All you have to do is move the arm to multiple poses and press the [Enter] key to record each one. We recommend recording at least 15 poses. Keep the marker close to the camera, around 10 [cm], as exemplified in the images below. Press `q` when finished. Example of recorded poses:
+All you have to do is move the arm to multiple poses and press the [Enter] key to record each one. We recommend recording at least 15 poses. Rotate the tool around the shaft's axis between poses. Keep the marker close to the camera, around 10 [cm], as exemplified in the images below. Press `q` when finished. Example of recorded poses:
 
 <img src="https://user-images.githubusercontent.com/15831541/169905255-1a366464-45fd-421c-bf39-c8cb9dfa5055.png" width="60%">
 
