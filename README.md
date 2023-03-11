@@ -50,7 +50,7 @@ After doing that, let's record the green marker at multiple poses:
 
 `rosrun dvrk_calib_hand_eye record_image_and_joints.py`
 
-All you have to do is move the arm to multiple poses and press the [Enter] key to record each one. We recommend recording at least 15 poses. It's very important to rotate the tool around the shaft's axis between poses, rotate it to one one side and then the other between successive poses. Keep the marker close to the camera, around 10 [cm], as exemplified in the images below. Press `q` when finished. Example of recorded poses:
+All you have to do is move the arm to multiple poses and press the [Enter] key to record each one. We recommend recording at least 15 poses. `It's very important` to rotate the tool around the shaft's axis between poses, rotate it to one one side and then the other between successive poses. Keep the marker close to the camera, around 10 [cm], as exemplified in the images below. Press `q` when finished. Example of recorded poses:
 
 <img src="https://user-images.githubusercontent.com/15831541/169905255-1a366464-45fd-421c-bf39-c8cb9dfa5055.png" width="60%">
 
@@ -88,10 +88,45 @@ Remember always to activate the virtual environment `(venv)` and unset ROS's def
 
 ## Step 4 - Calculate the transformation (cam_T_basePSM)
 
-Final step, in a separate terminal (to re-set the ROS Python path) do the hand-eye calibration:
+Final step - in a separate terminal to re-set the ROS Python path - do the hand-eye calibration:
 ```
 rosrun dvrk_calib_hand_eye calib_hand_eye.py
 ```
+
+## Step 5 - Get position of end-effector relative to camera, like in the GIFF above
+
+All surgical instruments share the same initial DH parameters (up to j4), however the last 2 transformations (j5 and j6) it's specific for each instrument.
+Therefore you need to update the DH table below if you are not used the pro-grasp. These values you can find in the `.json` file of the tool, for example `psm-pro-grasp.json`.
+
+```
+def get_bPSM_T_j6(joint_value):
+    LRcc = 0.4318
+    LTool = 0.4162
+    LPitch2Yaw = 0.0091
+    #                                 alpha  ,          a  ,        theta               ,        d
+    base_T_j1 = transf_DH_modified( np.pi*0.5,          0. , joint_value[0] + np.pi*0.5 ,                  0. )
+    j1_T_j2   = transf_DH_modified(-np.pi*0.5,          0. , joint_value[1] - np.pi*0.5 ,                  0. )
+    j2_T_j3   = transf_DH_modified( np.pi*0.5,          0. ,                        0.0 , joint_value[2]-LRcc )
+    j3_T_j4   = transf_DH_modified(       0. ,          0. ,             joint_value[3] ,               LTool )
+    j4_T_j5   = transf_DH_modified(-np.pi*0.5,          0. , joint_value[4] - np.pi*0.5 ,                  0. )
+    j5_T_j6   = transf_DH_modified(-np.pi*0.5 , LPitch2Yaw , joint_value[5] - np.pi*0.5 ,                  0. )
+    """
+    j6_T_j6f  = np.array([[ 0.0, -1.0,  0.0,  0.0], # Offset from file `psm-pro-grasp.json`
+                          [ 0.0,  0.0,  1.0,  0.0],
+                          [-1.0,  0.0,  0.0,  0.0],
+                          [ 0.0,  0.0,  0.0,  1.0]])
+    """
+    bPSM_T_j2 = np.matmul(base_T_j1, j1_T_j2)
+    bPSM_T_j3 = np.matmul(bPSM_T_j2, j2_T_j3)
+    bPSM_T_j4 = np.matmul(bPSM_T_j3, j3_T_j4)
+    bPSM_T_j5 = np.matmul(bPSM_T_j4, j4_T_j5)
+    bPSM_T_j6 = np.matmul(bPSM_T_j5, j5_T_j6)
+    #bPSM_T_j6f = np.matmul(bPSM_T_j6, j6_T_j6f) # To make pose the same as the one in the dVRK
+    return bPSM_T_j6
+```
+
+Then you simply multiply `cam_T_basePSM` @ `bPSM_T_j6`, and you have the end-effector relative to the camera.
+
 
 ## FAQ
 
@@ -105,7 +140,7 @@ The easiest is to repeat the calibration (step 2, 3 and 4). If you are using the
 When you rectify the camera rotates, therefore you need to update the transformation according to that rotation. Specifically, if you are using OpenCV's `... R1 ... = cv.stereoRectify()` you have to multiply `R1 = camRect_T_cam` with the estimated transformation `cam_T_basePSM`, since `camRect_T_basePSM = camRect_T_cam @ cam_T_basePSM`. Note that you will have to make `R1` homogeneous and 4x4 for doing this product. Another alternative (Option B) is to rectify the images captured in step 2 and repeat step 3 and 4. Note that if you do (Option B) you will also need to update the camera calibration values, set all the distortion to 0, since rectified images have no distortion and set the intrinsic with the first 3x3 values of your rectified intrinsics, you get this from `P1` if you use `cv.stereoRectify()`.
 
 4. `How to update the cam_T_basePSM transformation in real-time if I move the ECM?`
-To achieve this you have to perform another hand-eye calibration to estimate the rigid transformation from the ECM's centre (`/ECM/measured_cp`), to the camera. This way, every time the ECM joint values change you can re-adjust the `cam_T_basePSM` transformation. However, keep in mind that at any time, if you move the set-up joints, you need to calibrate `cam_T_basePSM` from scratch (step 2, 3 and 4).
+To be honest this is hard to achieve, because the encoder readings of the ECM are not very accurate. Still, you could try to achieve this by performing another hand-eye calibration to estimate the rigid transformation from the ECM's centre (`/ECM/measured_cp`), to the camera. This way, every time the ECM joint values change you can re-adjust the `cam_T_basePSM` transformation. However, keep in mind that at any time, if you move the set-up joints, you need to calibrate `cam_T_basePSM` from scratch (step 2, 3 and 4).
 
 ## Reference
 
